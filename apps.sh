@@ -42,7 +42,7 @@ function install {
 
     sudo apt-get -y install \
         git spotify-client virtualbox htop rxvt-unicode \
-        zsh neovim\
+        zsh neovim compton\
         # start i3-gaps dependencies
         libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
         libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
@@ -52,7 +52,7 @@ function install {
         autoconf libxcb-xrm0 libxcb-xrm-dev google-chrome-stable \
         #end i3-gaps dependencies
         libev-dev xclip curl software-properties-common \
-        python-dev python-pip python3-dev python3-pip
+        python-dev python-pip python3-dev python3-pip rofi i3blocks
 
     sudo pip  install --upgrade neovim
     sudo pip2 install --upgrade neovim

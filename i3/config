@@ -322,7 +322,7 @@ workspace 7 output DP1
 #}
 bar {
     position top
-    status_command i3blocks -c /home/jakobat/.i3/i3blocks.conf
+    status_command i3blocks -c /home/jakob/.config/i3/i3blocks.conf
         colors {
             background $bg-color
             separator #757575
