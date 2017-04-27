@@ -10,6 +10,8 @@ rm -rf ~/.i3
 rm -rf ~/.config/i3
 
 # Create symlink to my i3 config
-sudo ln -sfv $DIR/i3 ~/.config/
-sudo ln -sfv $DIR/i3status ~/.config/
+ln -sfv $DIR/i3 $HOME/.config/
+ln -sfv $DIR/i3status $HOME/.config/
 
+ln -sfv $DIR/.zshrc ~/
+ln -sfv $DIR/.aliases ~/
