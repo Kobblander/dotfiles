@@ -1,0 +1,2 @@
+alias staging="ssh jakobat@act-staging-01.siminn.is"
+alias tinni="ssh jakobat@tinni-01.siminn.is"
