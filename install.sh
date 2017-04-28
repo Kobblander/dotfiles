@@ -15,3 +15,4 @@ ln -sfv $DIR/i3status $HOME/.config/
 
 ln -sfv $DIR/.zshrc ~/
 ln -sfv $DIR/.aliases ~/
+ln -sfv $DIR/.Xresources ~/
