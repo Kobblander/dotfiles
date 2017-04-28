@@ -100,9 +100,9 @@ bindsym $mod+minus scratchpad show
 
 # Some startup scripts
 exec slack
-exec --no-startup-id multipleDisplays
-exec xautolock -time 5 -locker lock
-exec --no-startup-id wallpaper
+exec --no-startup-id multipleDisplays.sh
+exec xautolock -time 5 -locker lock.sh
+exec --no-startup-id wallpaper.sh
 
 ## TODO: Take screenshot here and compose lock screen photo then execute barstart
 
@@ -304,8 +304,17 @@ workspace 7 output DP1
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #bar {
-#        i3bar_command ~/.config/panels/barstart
+#    #i3bar_command ~/.config/panels/barstart
+#    status_command i3status -c /home/jakob/.config/i3status/config
+#    position top
+#    colors {
+#        background          $bg_bar
+#        focused_workspace	$bg_active_workspace      $bg_active_workspace    $text_active    #00FF00
+#        inactive_workspace  $bg_inactive_workspace    $bg_inactive_workspace  $text_inactive
+#        active_workspace    $bg_inactive_workspace    $bg_inactive_workspace  $text_inactive
+#    }
 #}
+        
 #bar {
 #    i3bar_command /usr/bin/i3bar -t
 #    #status_command i3status -c /home/jakobat/.config/i3status/i3status.conf
@@ -320,15 +329,15 @@ workspace 7 output DP1
 #    height 25
 #    modifier Mod1
 #}
-bar {
-    position top
-    status_command i3blocks -c /home/jakob/.config/i3/i3blocks.conf
-        colors {
-            background $bg-color
-            separator #757575
-            #                  border             background         text
-            focused_workspace  $focused-color     $focused-color     $text-color
-            inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-            urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-        }
-}
+#bar {
+#    position top
+#    status_command i3blocks -c /home/jakob/.config/i3/i3blocks.conf
+#        colors {
+#            background $bg-color
+#            separator #757575
+#            #                  border             background         text
+#            focused_workspace  $focused-color     $focused-color     $text-color
+#            inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#            urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#        }
+#}

@@ -42,7 +42,7 @@ function install {
 
     sudo apt-get -y install \
         git spotify-client virtualbox htop rxvt-unicode \
-        zsh neovim compton\
+        zsh neovim compton feh cairo \
         # start i3-gaps dependencies
         libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
         libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
@@ -52,7 +52,10 @@ function install {
         autoconf libxcb-xrm0 libxcb-xrm-dev google-chrome-stable \
         #end i3-gaps dependencies
         libev-dev xclip curl software-properties-common \
-        python-dev python-pip python3-dev python3-pip rofi i3blocks
+        python-dev python-pip python3-dev python3-pip rofi i3blocks \
+        xcb-proto cmake xcb libxcb-ewmh-dev python-xcbgen libasound2-dev \
+        libmpdclient-dev libiw-dev libcurl4-openssl-dev
+
 
     sudo pip  install --upgrade neovim
     sudo pip2 install --upgrade neovim
@@ -87,6 +90,15 @@ function clones {
     # Need to first install i3
     # https://github.com/Airblader/i3
     git clone https://github.com/Airblader/i3.git
+
+    git clone --branch 3.0.5 --recursive https://github.com/jaagr/polybar
+    mkdir polybar/build
+    cd polybar/build
+    cmake ..
+    sudo make install
+
+    git clone https://github.com/stark/siji && cd siji
+    ./install.sh
 }
 
 function configuration {
