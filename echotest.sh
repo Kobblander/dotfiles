@@ -13,7 +13,6 @@ function successbox() {
 }
 
 echo "Installing..."
-
 errorbox; echo "Foobar"
 successbox; echo "Polybar"
 successbox; echo "Git"
