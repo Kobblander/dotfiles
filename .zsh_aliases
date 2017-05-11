@@ -1,2 +1,4 @@
 alias staging="ssh jakobat@act-staging-01.siminn.is"
-alias tinni="ssh jakobat@tinni-01.siminn.is"
+alias tinni="ssh jakobat@tinni.siminn.is"
+alias remoteStaging="sshfs jakobat@act-staging-01.siminn.is:/home/jakobat $HOME/Remote/Staging -o allow_other" 
+alias remoteTinni=""

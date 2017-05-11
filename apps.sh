@@ -42,7 +42,7 @@ function install {
 
     sudo apt-get -y install \
         git spotify-client virtualbox htop rxvt-unicode \
-        zsh neovim compton feh cairo \
+        zsh neovim compton feh cairo sshfs \
         # start i3-gaps dependencies
         libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
         libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
@@ -54,7 +54,7 @@ function install {
         libev-dev xclip curl software-properties-common \
         python-dev python-pip python3-dev python3-pip rofi i3blocks \
         xcb-proto cmake xcb libxcb-ewmh-dev python-xcbgen libasound2-dev \
-        libmpdclient-dev libiw-dev libcurl4-openssl-dev
+        libmpdclient-dev libiw-dev libcurl4-openssl-dev slack
 
 
     sudo pip  install --upgrade neovim

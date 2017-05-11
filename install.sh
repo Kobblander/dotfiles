@@ -20,5 +20,9 @@ ln -sfv $DIR/i3status ~/.config/
 ln -sfv $DIR/polybar ~/.config/
 
 ln -sfv $DIR/.zshrc ~/
-ln -sfv $DIR/.aliases ~/
+ln -sfv $DIR/.zsh_aliases ~/
 ln -sfv $DIR/.Xresources ~/
+
+sudo mkdir /mnt/staging
+
+sudo sshfs -o allow_other,defer_permissions jakobat@act-staging-01:/ /mnt/staging
