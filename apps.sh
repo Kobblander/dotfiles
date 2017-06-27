@@ -18,8 +18,9 @@ function addRepositories {
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-get-key add -
     sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt-get/sources.list.d/google.list'
 
-
-
+    #Java
+    echo "Adding java install key..."
+    sudo add-apt-repository ppa:webupd8team/java
 
 }
 
@@ -54,7 +55,8 @@ function install {
         libev-dev xclip curl software-properties-common \
         python-dev python-pip python3-dev python3-pip rofi i3blocks \
         xcb-proto cmake xcb libxcb-ewmh-dev python-xcbgen libasound2-dev \
-        libmpdclient-dev libiw-dev libcurl4-openssl-dev slack
+        libmpdclient-dev libiw-dev libcurl4-openssl-dev slack \
+        oracle-java8-installer oracle-java8-set-default clang
 
 
     sudo pip  install --upgrade neovim

@@ -90,3 +90,5 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export PATH="/home/jakob/anaconda3/bin:$PATH"

@@ -1,7 +1,9 @@
 #!/bin/bash
 scrot /tmp/screen.png
-convert ~/plain.png -blur 0x9 /tmp/screen.png;
-#convert /tmp/screen.png -scale 2% -scale 5000% /tmp/screen.png
+#convert /tmp/screen.png -blur 0x5 /tmp/screen.png;
+#convert /tmp/screen.png -scale 4% -scale 5000% /tmp/screen.png
+convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
+
 
 #PICTURE=pepe.png
 PICTURE=key-256.png
@@ -34,5 +36,5 @@ then
     done
 fi
 
-#i3lock -n -i /tmp/screen.png
+i3lock -n -i /tmp/screen.png
 #i3lock -u -n -i /home/jakobat/Pictures/Wallpapers/soldark.jpg

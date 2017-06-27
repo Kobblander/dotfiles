@@ -134,7 +134,7 @@ rofi.font:              Consola Mono Book 20
 rofi.color-window:      argb:bb181818, argb:bb181818, #1818181
 rofi.color-normal:      argb:0095C7AE, #8fa1b3, argb:0095C7AE, argb:55101218, #95C7AE
 !rofi.separator-style:   none
-!Xft.dpi:                126
+Xft.dpi:                96
 
 !# i3
 !#rofi.terminal:  urxvt
