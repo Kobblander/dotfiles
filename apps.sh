@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 function addRepositories {
     echo "Adding repositories..."
