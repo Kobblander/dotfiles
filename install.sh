@@ -25,4 +25,4 @@ ln -sfv $DIR/.Xresources ~/
 
 sudo mkdir /mnt/staging
 
-sudo sshfs -o allow_other,defer_permissions jakobat@act-staging-01:/ /mnt/staging
+#sudo sshfs -o allow_other,defer_permissions jakobat@act-staging-01:/ /mnt/staging
