@@ -85,8 +85,8 @@ URxvt*depth:            32
 
 !urxvt fonts: 
 
-!URxvt.font:             xft:Droid Sans Mono for Powerline:size=10
-URxvt.font:             xft:Source Code Pro for Powerline:size=10
+URxvt.font:             xft:Droid Sans Mono for Powerline:size=10
+!URxvt.font:             xft:Source Code Pro for Powerline:size=10
 !URxvt.font:     xft:SourceCodePro+Powerline+Awesome Regular:regular:size=9; antialias:True; hinting:True;
 !URxvt.boldFont: xft:SourceCodePro+Powerline+Awesome:bold:size=9; antialias:True; hinting:True;
 !URxvt.font:     xft:Sauce Code Powerline:regular:size=12; antialias:True; hinting:True;

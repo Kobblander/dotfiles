@@ -102,14 +102,14 @@ bindsym $mod+minus scratchpad show
 
 # Some startup scripts
 exec slack
-exec /home/jakob/.config/polybar/config
+exec /home/jakobat/.config/polybar/config
 exec --no-startup-id multipleDisplays.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec xautolock -time 5 -locker lock.sh
-exec --no-startup-id wallpaper.sh
+exec xautolock -time 5 -locker /bin/bash ~/.dotfiles/betterlockscreen/lock.sh -l blur
+exec --no-startup-id /bin/bash ~/.dotfiles/betterlockscreen/lock.sh -w
 
 # Lock screen
-bindsym $mod+Shift+x exec lock.sh
+bindsym $mod+Shift+x exec /bin/bash ~/.dotfiles/betterlockscreen/lock.sh -l blur
 
 # Language settings
 bindsym $mod+i exec setxkbmap is

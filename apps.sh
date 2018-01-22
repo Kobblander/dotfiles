@@ -1,67 +1,80 @@
-#!/bin/zsh
+#!/bin/bash
+
+time=i`date '+%Y_%m_%d__%H_%M_%S'`
+filename="appserror"
+errorfile="$time-$filename.log"
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+
+function checkIfError() {
+    if [ $? -eq 0 ]; then
+        echo -e "\t[${GREEN}✓${NC}] $1"
+    else
+        echo -e "\t[${RED}x${NC}] $1"
+    fi
+}
 
 function addRepositories {
     echo "Adding repositories..."
-    sudo add-apt-repository ppa:aguignard/ppa
+    sudo add-apt-repository -y ppa:aguignard/ppa > /dev/null 2> $errorfile
+    checkIfError "Adding qguignard repository..."
 
     # Neovim
-    echo "Adding neovim repository..."
-    sudo add-apt-get-repository ppa:neovim-ppa/stable
+    sudo add-apt-repository -y ppa:neovim-ppa/stable > /dev/null 2> $errorfile
+    checkIfError "Adding neovim repositories..."
 
     # Spotify
-    echo "Adding spotify key..."
-    sudo apt-get-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
-    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt-get/sources.list.d/spotify.list
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0DF731E45CE24F27EEEB1450EFDC8610341D9410 > /dev/null 2> $errorfile
+    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list > /dev/null 2> $errorfile
+    checkIfError "Adding spotify repositories..."
 
     # Chrome
-    echo "Adding chrome key..."
+    {
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-get-key add -
-    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt-get/sources.list.d/google.list'
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    } > /dev/null 2> $errorfile
+    checkIfError "Adding chrome repositories..."
 
     #Java
-    echo "Adding java install key..."
-    sudo add-apt-repository ppa:webupd8team/java
+    sudo add-apt-repository -y ppa:webupd8team/java  > /dev/null 2> $errorfile
+    checkIfError "Adding java repositories..."
 
 }
 
 function update {
-    echo "Performing update..."
-    sudo apt-get -y --force-yes update
-    echo "Performing dist-upgrade..."
-    sudo apt-get -y --force-yes dist-upgrade
+    sudo apt-get -y --force-yes update > /dev/null 2> $errorfile
+    checkIfError "Performing update..." > /dev/null 2> $errorfile
+    sudo apt-get -y --force-yes dist-upgrade /vel/null 2> $errorfile
+    checkIfError "Performing dist-upgrade"
 }
 
 function extra {
-    echo "Changing shell to zsh..."
+    echo "Performing extra..."
+
     sudo chsh $(which zsh)
-    echo "Reloading .Xresources"
+    checkIfError "Changing shell to zsh..."
     xrdb ~/.Xresources
+    checkIfError "Reloading .Xresources"
 }
 
 function install {
-    echo "Performing installs..."
-
-    sudo apt-get -y install \
-        git spotify-client virtualbox htop rxvt-unicode \
-        zsh neovim compton feh cairo sshfs \
-        # start i3-gaps dependencies
-        libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
-        libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
-        libstartup-notification0-dev libxcb-randr0-dev \
-        libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
-        libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
-        autoconf libxcb-xrm0 libxcb-xrm-dev google-chrome-stable \
-        #end i3-gaps dependencies
-        libev-dev xclip curl software-properties-common \
-        python-dev python-pip python3-dev python3-pip rofi i3blocks \
-        xcb-proto cmake xcb libxcb-ewmh-dev python-xcbgen libasound2-dev \
-        libmpdclient-dev libiw-dev libcurl4-openssl-dev slack \
-        oracle-java8-installer oracle-java8-set-default clang
-
+    echo "Installing packages from packages.txt.."
+    while read p; do
+	$(sudo apt-get -y install "$p") > /dev/null 2> $errorfile
+	
+	#$(sudo apt-get -y install $p)
+	checkIfError "Installing $p..."
+    done <packages.txt
 
     sudo pip  install --upgrade neovim
+    checkIfError "Pip install --upgrade neovim..."
     sudo pip2 install --upgrade neovim
+    checkIfError "Pip2 install --upgrade neovim..."
     sudo pip3 install --upgrade neovim
+    checkIfError "Pip3 install --upgrade neovim..."
 
 }
 
@@ -70,16 +83,21 @@ function clones {
     # Need to first install zsh
     # https://github.com/robbyrussell/oh-my-zsh
     sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    checkIfError "Cloning oh my zsh"
 
     # Powerline fonts for zsh
     git clone https://github.com/powerline/fonts.git
+    checkIfError "Cloning powerline fonts for zsh..."
     cd fonts
     ./install.sh
+    checkIfError "Installing fonts for zsh..."
     cd ..
     rm -rf fonts
+    checkIfError
 
     cp ".local/share/fonts/Source\ Code\ Pro\ for\ Powerline.otf ~/.fonts"
     sudo fc-cache -vf ~/.fonts
+    checkIfError
 
 
     # Zsh powerline
@@ -87,38 +105,65 @@ function clones {
 
     # powerlevel9k zsh theme
     git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+    checkIfError"Cloning powerline9k zsh theme"
 
     # i3 gaps
     # Need to first install i3
     # https://github.com/Airblader/i3
     git clone https://github.com/Airblader/i3.git
+    checkIfError "Cloning i3"
 
     git clone --branch 3.0.5 --recursive https://github.com/jaagr/polybar
+    checkIfError
     mkdir polybar/build
     cd polybar/build
     cmake ..
+    checkIfError
     sudo make install
+    checkIfError
 
     git clone https://github.com/stark/siji && cd siji
+    checkIfError
     ./install.sh
+    checkIfError
+
+    # i3lock-color
+    git clone https://github.com/PandorasFox/i3lock-color/tree/dev
+    cd i3lock-color
+    autoreconf -i && ./configure && make
+    sudo make install
+
+    # Better lock screen, uses i3lock-color
+    git clone https://github.com/pavanjadhaw/betterlockscreen
 }
 
 function configuration {
     # For neovim
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+    checkIfError
     sudo update-alternatives --config vi
+    checkIfError
     sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+    checkIfError
     sudo update-alternatives --config vim
+    checkIfError
     sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+    checkIfError
     sudo update-alternatives --config editor
+    checkIfError
 
     # Work in progress
     cp .config ~/.config
 }
 
-addRepositories
+#addRepositories
+#
+#update
 
+install
 
-
+#extra
+#
+#configuration
 
 
