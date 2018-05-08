@@ -33,6 +33,7 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 let g:syntastic_disabled_filetypes=['c']
 let g:syntastic_disabled_filetypes=['cpp']
 let g:syntastic_disabled_filetypes=['pc']
+let g:syntastic_cpp_include_dirs = ['/opt/include/soci', '/opt/include/boost_1_61_0']
 
 try
 source ~/.config/nvim/.vim_runtime/my_configs.vim
